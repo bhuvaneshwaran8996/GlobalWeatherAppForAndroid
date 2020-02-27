@@ -1,8 +1,8 @@
 package com.example.globalweatherapp.di;
 
-import com.example.globalweatherapp.AuthActivity;
 import com.example.globalweatherapp.di.auth.AuthModule;
 import com.example.globalweatherapp.di.auth.AuthViewmodlesModule;
+import com.example.globalweatherapp.ui.auth.AuthActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
