@@ -1,23 +1,15 @@
 package com.example.globalweatherapp.ui.auth;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.example.globalweatherapp.Repository.AuthRepository;
-import com.example.globalweatherapp.model.CheckDevice;
-import com.example.globalweatherapp.network.AuthApi;
+import com.example.globalweatherapp.model.Device;
+import com.example.globalweatherapp.model.DeviceDetails;
+import com.google.gson.JsonObject;
 
 import javax.inject.Inject;
-
-import io.reactivex.Flowable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class AuthViewModel extends ViewModel {
 
@@ -42,6 +34,26 @@ public class AuthViewModel extends ViewModel {
 
     public LiveData<String> getDevice(){
         return this.authRepository.getCheckDevice();
+    }
+
+    public LiveData<AuthResource<Device>> getLoginDEvice(){
+
+        return  this.authRepository.getDeviceDetails();
+    }
+
+    public void loginDevice(String deviceId){
+
+         this.authRepository.logindevice(deviceId);
+
+    }
+
+    public void signupDevice(String id){
+
+         this.authRepository.signupDevice(id);
+    }
+
+    public LiveData<AuthResource<Device>> getSavedDevice(){
+        return this.authRepository.getSignedDevice();
     }
 
 //    public void setDeviceId(String id){
