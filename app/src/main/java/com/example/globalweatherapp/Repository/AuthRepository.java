@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.globalweatherapp.db.RealmManager;
 import com.example.globalweatherapp.model.CheckDevice;
 import com.example.globalweatherapp.model.Device;
 import com.example.globalweatherapp.model.DeviceDetails;
@@ -17,6 +18,8 @@ import com.example.globalweatherapp.ui.auth.AuthActivity;
 import com.example.globalweatherapp.ui.auth.AuthResource;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import java.util.logging.Handler;
 
 import javax.inject.Inject;
 
@@ -35,6 +38,7 @@ public class AuthRepository {
     public String error = "";
     public final AuthApi authApi;
 
+
     @Inject
     Device device;
 
@@ -42,6 +46,7 @@ public class AuthRepository {
     Token token;
     @Inject
     public AuthRepository(AuthApi authApi) {
+
         this.authApi = authApi;
     }
 
@@ -74,7 +79,7 @@ public class AuthRepository {
                                                  device = new Gson().fromJson(inputjson,Device.class);
 
                                                 Log.d(TAG, "apply: signup"+device.toString());
-                                                token.setToken(device.token);
+//                                                saveToDB(device);
                                                 return AuthResource.authenticated(device);
                                             }
                                             return AuthResource.error("device not saved",(Device)null);
@@ -121,7 +126,8 @@ public class AuthRepository {
                                                 String inputjson = responseBodyResponse.body().string();
                                                  device = new Gson().fromJson(inputjson,Device.class);
 
-                                                 token.setToken(device.token);
+//                                                 saveToDB(device);
+
                                                 Log.d(TAG, "apply: login "+device.toString());
                                                 return AuthResource.authenticated(device);
                                             }
@@ -224,4 +230,10 @@ public class AuthRepository {
     public LiveData<AuthResource<Device>> getDeviceDetails() {
         return devicedetailslivedata;
     }
+
+//    public void saveToDB(Device device){
+//        RealmManager.createDeviceDao().save(device);
+//
+//
+//    }
 }

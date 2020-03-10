@@ -2,6 +2,7 @@ package com.example.globalweatherapp.ui.auth.Weather;
 
 import android.os.Bundle;
 
+import com.example.globalweatherapp.db.RealmManager;
 import com.example.globalweatherapp.model.Device;
 import com.example.globalweatherapp.model.Token;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,10 +21,7 @@ import javax.inject.Inject;
 public class WeatherActivity extends AppCompatActivity {
 
 
-    @Inject
-    Token token;
 
-    @Inject
     Device device;
     private static final String TAG = "WeatherActivity";
     @Override
@@ -31,9 +29,10 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
+        RealmManager.open();
 
-        Log.d(TAG, "onCreate:  "+device);
-        Log.d(TAG, "onCreate: "+token);
+        device =  RealmManager.createDeviceDao().loadAll();
+        Log.d(TAG, "onCreate: "+device);
     }
 
 }

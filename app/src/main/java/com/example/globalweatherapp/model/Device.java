@@ -9,13 +9,13 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-public class Device implements Serializable {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Device extends RealmObject implements Serializable {
 
 
-
-    @Inject
     public Device(){
-
     }
 
 
@@ -32,6 +32,7 @@ public class Device implements Serializable {
     @SerializedName("GPSPermitted")
     public Boolean GPSPermitted;
 
+    @PrimaryKey
     @SerializedName("DeviceId")
     public String DeviceId;
 
