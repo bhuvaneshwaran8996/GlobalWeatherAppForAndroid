@@ -1,4 +1,4 @@
-package com.example.globalweatherapp.ui.auth.Weather;
+package com.example.globalweatherapp.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 

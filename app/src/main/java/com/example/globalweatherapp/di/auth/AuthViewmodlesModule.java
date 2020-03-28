@@ -4,7 +4,7 @@ package com.example.globalweatherapp.di.auth;
 import androidx.lifecycle.ViewModel;
 
 import com.example.globalweatherapp.di.ViewModelKey;
-import com.example.globalweatherapp.ui.auth.AuthViewModel;
+import com.example.globalweatherapp.viewmodels.AuthViewModel;
 
 import dagger.Binds;
 import dagger.Module;

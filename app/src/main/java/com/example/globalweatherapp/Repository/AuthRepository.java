@@ -1,5 +1,7 @@
 package com.example.globalweatherapp.Repository;
 
+import android.app.Activity;
+import android.content.Context;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -16,6 +18,7 @@ import com.example.globalweatherapp.model.Token;
 import com.example.globalweatherapp.network.AuthApi;
 import com.example.globalweatherapp.ui.auth.AuthActivity;
 import com.example.globalweatherapp.ui.auth.AuthResource;
+import com.example.globalweatherapp.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -40,6 +43,8 @@ public class AuthRepository {
 
 
     @Inject
+    Context context;
+    @Inject
     Device device;
 
     @Inject
@@ -51,90 +56,100 @@ public class AuthRepository {
     }
 
 
-    public void signupDevice(final String deviceId){
+    public void signupDevice(final String deviceId , Activity thisActivity) {
+
 
         signupmediatorlivedata.setValue(AuthResource.loading((Device) null));
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }finally {
+        if (Util.isNetworkConnectionAvailable(thisActivity)) {
 
-            final    LiveData<AuthResource<Device>> livedatasourcesignup =
-                    LiveDataReactiveStreams
-                            .fromPublisher(authApi.saveDevice(new CheckDevice(deviceId))
-                                    .onErrorReturn(new Function<Throwable, Response<ResponseBody>>() {
-                                        @Override
-                                        public Response<ResponseBody> apply(Throwable throwable) throws Exception {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }finally {
 
-                                            Log.d(TAG, "apply: signup"+throwable.getMessage());
-                                            return null;
-                                        }
-                                    }).map(new Function<Response<ResponseBody>, AuthResource<Device>>() {
-                                        @Override
-                                        public AuthResource<Device> apply(Response<ResponseBody> responseBodyResponse) throws Exception {
-                                            if(responseBodyResponse!=null && responseBodyResponse.isSuccessful()){
-                                                String inputjson = responseBodyResponse.body().string();
-                                                 device = new Gson().fromJson(inputjson,Device.class);
+                final    LiveData<AuthResource<Device>> livedatasourcesignup =
+                        LiveDataReactiveStreams
+                                .fromPublisher(authApi.saveDevice(new CheckDevice(deviceId))
+                                        .onErrorReturn(new Function<Throwable, Response<ResponseBody>>() {
+                                            @Override
+                                            public Response<ResponseBody> apply(Throwable throwable) throws Exception {
 
-                                                Log.d(TAG, "apply: signup"+device.toString());
-//                                                saveToDB(device);
-                                                return AuthResource.authenticated(device);
+                                                Log.d(TAG, "apply: signup"+throwable.getMessage());
+                                                return null;
                                             }
-                                            return AuthResource.error("device not saved",(Device)null);
-                                        }
-                                    })
-                                    .subscribeOn(Schedulers.io()));
+                                        }).map(new Function<Response<ResponseBody>, AuthResource<Device>>() {
+                                            @Override
+                                            public AuthResource<Device> apply(Response<ResponseBody> responseBodyResponse) throws Exception {
+                                                if(responseBodyResponse!=null && responseBodyResponse.isSuccessful()){
+                                                    String inputjson = responseBodyResponse.body().string();
+                                                    device = new Gson().fromJson(inputjson,Device.class);
 
-            signupmediatorlivedata.addSource(livedatasourcesignup, new Observer<AuthResource<Device>>() {
-                @Override
-                public void onChanged(AuthResource<Device> deviceAuthResource) {
-                    signupmediatorlivedata.setValue(deviceAuthResource);
-                    signupmediatorlivedata.removeSource(livedatasourcesignup);
-                }
-            });
+                                                    Log.d(TAG, "apply: signup"+device.toString());
+//                                                saveToDB(device);
+                                                    return AuthResource.authenticated(device);
+                                                }
+                                                return AuthResource.error("device not saved",(Device)null);
+                                            }
+                                        })
+                                        .subscribeOn(Schedulers.io()));
+
+                signupmediatorlivedata.addSource(livedatasourcesignup, new Observer<AuthResource<Device>>() {
+                    @Override
+                    public void onChanged(AuthResource<Device> deviceAuthResource) {
+                        signupmediatorlivedata.setValue(deviceAuthResource);
+                        signupmediatorlivedata.removeSource(livedatasourcesignup);
+                    }
+                });
+            }
+
+
+        }else{
+            Log.d(TAG, "signupDevice: "+"connection not available");
         }
 
 
 
 
     }
-    public void logindevice(final String deviceId) {
-
+    public void logindevice(final String deviceId,Activity thisActivity) {
 
         devicedetailslivedata.setValue(AuthResource.loading((Device) null));
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }finally {
+
+        if(Util.isNetworkConnectionAvailable(thisActivity)){
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }finally {
 
 
-            final    LiveData<AuthResource<Device>> livedatalogindevice =
-                    LiveDataReactiveStreams
-                            .fromPublisher(authApi.login(new CheckDevice(deviceId))
-                                    .onErrorReturn(new Function<Throwable, Response<ResponseBody>>() {
-                                        @Override
-                                        public Response<ResponseBody> apply(Throwable throwable) throws Exception {
-                                            return null;
-                                        }
-                                    }).map(new Function<Response<ResponseBody>, AuthResource<Device>>() {
-                                        @Override
-                                        public AuthResource<Device> apply(Response<ResponseBody> responseBodyResponse) throws Exception {
-                                            if(responseBodyResponse!=null && responseBodyResponse.isSuccessful()){
-                                                String inputjson = responseBodyResponse.body().string();
-                                                 device = new Gson().fromJson(inputjson,Device.class);
+                final    LiveData<AuthResource<Device>> livedatalogindevice =
+                        LiveDataReactiveStreams
+                                .fromPublisher(authApi.login(new CheckDevice(deviceId))
+                                        .onErrorReturn(new Function<Throwable, Response<ResponseBody>>() {
+                                            @Override
+                                            public Response<ResponseBody> apply(Throwable throwable) throws Exception {
+                                                return null;
+                                            }
+                                        }).map(new Function<Response<ResponseBody>, AuthResource<Device>>() {
+                                            @Override
+                                            public AuthResource<Device> apply(Response<ResponseBody> responseBodyResponse) throws Exception {
+                                                if(responseBodyResponse!=null && responseBodyResponse.isSuccessful()){
+                                                    String inputjson = responseBodyResponse.body().string();
+                                                    device = new Gson().fromJson(inputjson,Device.class);
 
 //                                                 saveToDB(device);
 
-                                                Log.d(TAG, "apply: login "+device.toString());
-                                                return AuthResource.authenticated(device);
+                                                    Log.d(TAG, "apply: login "+device.toString());
+                                                    return AuthResource.authenticated(device);
+                                                }
+                                                return AuthResource.error("not logegd in",(Device)null);
                                             }
-                                            return AuthResource.error("not logegd in",(Device)null);
-                                        }
-                                    })
-                                    .subscribeOn(Schedulers.io()));
+                                        })
+                                        .subscribeOn(Schedulers.io()));
 
 
 //        final LiveData<AuthResource<JsonObject>> deviceDetailsLiveData = LiveDataReactiveStreams.fromPublisher(
@@ -158,62 +173,72 @@ public class AuthRepository {
 //                })
 //        );
 
-            devicedetailslivedata.addSource(livedatalogindevice, new Observer<AuthResource<Device>>() {
-                @Override
-                public void onChanged(AuthResource<Device> deviceDetailsAuthResource) {
-                    devicedetailslivedata.setValue(deviceDetailsAuthResource);
-                    devicedetailslivedata.removeSource(livedatalogindevice);
-                }
-            });
+                devicedetailslivedata.addSource(livedatalogindevice, new Observer<AuthResource<Device>>() {
+                    @Override
+                    public void onChanged(AuthResource<Device> deviceDetailsAuthResource) {
+                        devicedetailslivedata.setValue(deviceDetailsAuthResource);
+                        devicedetailslivedata.removeSource(livedatalogindevice);
+                    }
+                });
 
+            }
+        }else{
+
+            Log.d(TAG, "logindevice: "+"connectio not available");
         }
+
 
     }
 
-    public void setDeviceId(String id) {
+    public void setDeviceId(String id , Activity thisActivity) {
 
 
-        final LiveData<String> source = LiveDataReactiveStreams
-                .fromPublisher(authApi.checkDevice(new CheckDevice(id))
-                        .onErrorReturn(new Function<Throwable, String>() {
-                            @Override
-                            public String apply(Throwable throwable) throws Exception {
-                                Log.d(TAG, "apply: " + throwable.getMessage());
+        if(Util.isNetworkConnectionAvailable(thisActivity)) {
 
-                                error = throwable.getMessage();
-                                return error;
-                            }
-                        })
-                        .map(new Function<String, String>() {
-                            @Override
-                            public String apply(String s) throws Exception {
+
+            final LiveData<String> source = LiveDataReactiveStreams
+                    .fromPublisher(authApi.checkDevice(new CheckDevice(id))
+                            .onErrorReturn(new Function<Throwable, String>() {
+                                @Override
+                                public String apply(Throwable throwable) throws Exception {
+                                    Log.d(TAG, "apply: " + throwable.getMessage());
+
+                                    error = throwable.getMessage();
+                                    return error;
+                                }
+                            })
+                            .map(new Function<String, String>() {
+                                @Override
+                                public String apply(String s) throws Exception {
 //                                if(!s.equalsIgnoreCase("0") || !s.equalsIgnoreCase("1")){
 //
 //                                    Log.d(TAG,s);
 //                                    return AuthResource.error(s,(String)null);
 //                                }
-                                if (!s.equalsIgnoreCase("0") && !s.equalsIgnoreCase("1")) {
-                                    return s;//returns error message there
+                                    if (!s.equalsIgnoreCase("0") && !s.equalsIgnoreCase("1")) {
+                                        return s;//returns error message there
+                                    }
+
+
+                                    Log.d(TAG, "apply: " + s);
+
+
+                                    return s;
+
                                 }
+                            })
+                            .subscribeOn(Schedulers.io()));
 
-
-                                Log.d(TAG, "apply: " + s);
-
-
-                                return s;
-
-                            }
-                        })
-                        .subscribeOn(Schedulers.io()));
-
-        authcheckdevice.addSource(source, new Observer<String>() {
-            @Override
-            public void onChanged(String string) {
-                authcheckdevice.setValue(string);
-                authcheckdevice.removeSource(source);
-            }
-        });
-
+            authcheckdevice.addSource(source, new Observer<String>() {
+                @Override
+                public void onChanged(String string) {
+                    authcheckdevice.setValue(string);
+                    authcheckdevice.removeSource(source);
+                }
+            });
+        }else{
+            Log.d(TAG, "setDeviceId: "+"network not available");
+        }
     }
 
 

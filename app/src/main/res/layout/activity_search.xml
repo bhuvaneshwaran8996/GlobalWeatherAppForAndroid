@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#6aa1e1"
+        tools:context=".ui.auth.search.SearchActivity">
+
+        <ProgressBar
+
+            android:id="@+id/search_progress"
+            android:visibility="gone"
+            tools:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+        <include
+            android:id="@+id/search_layout"
+            layout="@layout/toolbar" />
+
+        <View
+            android:id="@+id/view_seperator"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_below="@id/search_layout"
+            android:background="@color/white" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/search_list"
+            android:layout_below="@+id/view_seperator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>
+

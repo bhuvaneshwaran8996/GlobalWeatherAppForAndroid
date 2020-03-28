@@ -1,10 +1,10 @@
 package com.example.globalweatherapp.ui.auth;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,18 +17,15 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.RequestManager;
 import com.example.globalweatherapp.R;
 import com.example.globalweatherapp.db.RealmManager;
-import com.example.globalweatherapp.model.CheckDevice;
 import com.example.globalweatherapp.model.Device;
-import com.example.globalweatherapp.model.DeviceDetails;
 import com.example.globalweatherapp.network.AuthApi;
 import com.example.globalweatherapp.ui.auth.Weather.WeatherActivity;
+import com.example.globalweatherapp.viewmodels.AuthViewModel;
 import com.example.globalweatherapp.viewmodels.ViewModelProviderFactory;
-import com.google.gson.JsonObject;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
-import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
@@ -61,6 +58,8 @@ public class AuthActivity extends DaggerAppCompatActivity {
 
     String m_androidId;
 
+    Activity thisActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,13 +68,13 @@ public class AuthActivity extends DaggerAppCompatActivity {
         imageView = findViewById(R.id.splashimage);
         requestManager.load(logo).into(imageView);
          m_androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-
+        thisActivity = AuthActivity.this;
         Log.d(TAG, "onCreate: "+m_androidId);
         RealmManager.open();
 
 
         authViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AuthViewModel.class);
-        authViewModel.setDevice(m_androidId);
+        authViewModel.setDevice(m_androidId,thisActivity);
         subscribeobservers();
 
 
@@ -89,13 +88,13 @@ public class AuthActivity extends DaggerAppCompatActivity {
             public void onChanged(String s) {
 
                 if(s.equalsIgnoreCase("1")){ //device already exists, so login
-                    login(m_androidId);
+                    login(m_androidId,thisActivity);
                     subscribeloginobserver();
                 }else if(s.equalsIgnoreCase("0")){ //device does not exist, we need to signup here
-                    signup(m_androidId);
+                    signup(m_androidId,thisActivity);
                     subscribesignupobserver();
                 }else{
-                    Log.d(TAG, "onChanged: CheckDevice"+s);
+                    Log.d(TAG, "onChanged: CheckDevice "+s);
                 }
             }
         });
@@ -213,15 +212,15 @@ public class AuthActivity extends DaggerAppCompatActivity {
         });
     }
 
-    public void signup(String id){
-        authViewModel.signupDevice(id);
+    public void signup(String id,Activity thisActivity){
+        authViewModel.signupDevice(id,thisActivity);
 
     }
 
-    private void login(String id) {
+    private void login(String id,Activity thisActivity) {
 
 
-        authViewModel.loginDevice(id);
+        authViewModel.loginDevice(id,thisActivity);
     }
 
     public void showProgressbar(boolean isvisilbe) {

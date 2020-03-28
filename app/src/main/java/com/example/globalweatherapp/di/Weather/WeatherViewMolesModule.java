@@ -3,8 +3,7 @@ package com.example.globalweatherapp.di.Weather;
 import androidx.lifecycle.ViewModel;
 
 import com.example.globalweatherapp.di.ViewModelKey;
-import com.example.globalweatherapp.ui.auth.AuthViewModel;
-import com.example.globalweatherapp.ui.auth.Weather.WeatherViewModel;
+import com.example.globalweatherapp.viewmodels.WeatherViewModel;
 
 import dagger.Binds;
 import dagger.Module;

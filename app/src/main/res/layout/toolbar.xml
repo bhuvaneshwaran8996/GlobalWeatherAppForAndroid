@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+
+                        android:id="@+id/first_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        tools:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="30dp"
+
+
+                            android:layout_height="30dp"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/ic_menu" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
+
+                            <com.example.globalweatherapp.controls.TextViewBold
+                                android:id="@+id/city_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Chennai"
+                                android:textColor="@color/white">
+
+                            </com.example.globalweatherapp.controls.TextViewBold>
+
+                            <com.example.globalweatherapp.controls.TextViewRegular
+                                android:id="@+id/city_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="3.23pm"
+                                android:textAlignment="center"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+
+                        <ImageView
+
+                            android:id="@+id/search"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/ic_add" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/search_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+
+                            android:id="@+id/back_button"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/back_button" />
+
+                        <SearchView
+                            android:id="@+id/locationsearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/back_button"
+                            android:background="@android:color/transparent"
+                            android:queryBackground="@android:color/transparent"
+                            android:queryHint=" Enter the city name"
+                            tools:queryHint="@string/app_name" />
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,4 +1,6 @@
-package com.example.globalweatherapp.ui.auth;
+package com.example.globalweatherapp.viewmodels;
+
+import android.app.Activity;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
@@ -7,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.globalweatherapp.Repository.AuthRepository;
 import com.example.globalweatherapp.model.Device;
 import com.example.globalweatherapp.model.DeviceDetails;
+import com.example.globalweatherapp.ui.auth.AuthResource;
 import com.google.gson.JsonObject;
 
 import javax.inject.Inject;
@@ -25,9 +28,9 @@ public class AuthViewModel extends ViewModel {
 
     }
 
-    public void setDevice(String deviceId){
+    public void setDevice(String deviceId , Activity thisActivity){
 
-        this.authRepository.setDeviceId(deviceId);
+        this.authRepository.setDeviceId(deviceId,thisActivity);
 
     }
 
@@ -41,15 +44,15 @@ public class AuthViewModel extends ViewModel {
         return  this.authRepository.getDeviceDetails();
     }
 
-    public void loginDevice(String deviceId){
+    public void loginDevice(String deviceId, Activity thisActivity){
 
-         this.authRepository.logindevice(deviceId);
+         this.authRepository.logindevice(deviceId,thisActivity);
 
     }
 
-    public void signupDevice(String id){
+    public void signupDevice(String id,Activity thisActivity){
 
-         this.authRepository.signupDevice(id);
+         this.authRepository.signupDevice(id,thisActivity);
     }
 
     public LiveData<AuthResource<Device>> getSavedDevice(){
