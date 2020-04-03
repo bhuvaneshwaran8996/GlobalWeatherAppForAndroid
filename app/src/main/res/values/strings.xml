@@ -3,4 +3,5 @@
     <string name="title_activity_auth">AuthActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_weather">WeatherActivity</string>
+    <string name="ip_geoclocation">af34b08d63ab47319392394b2d2b5be2</string>
 </resources>

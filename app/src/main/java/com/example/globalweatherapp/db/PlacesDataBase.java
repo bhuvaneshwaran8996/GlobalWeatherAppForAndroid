@@ -10,27 +10,20 @@ import androidx.room.RoomDatabase;
 import com.example.globalweatherapp.model.PlacesRoom;
 
 
-
-@Database(entities = PlacesRoom.class,exportSchema = false,version = 1)
-public abstract  class PlacesDataBase extends RoomDatabase {
-
-
+@Database(entities = PlacesRoom.class,  version = 20)
+public abstract class PlacesDataBase extends RoomDatabase {
     public static String DB_NAME = "places_db";
+
     public static PlacesDataBase placesDataBase;
 
 
-    public static synchronized PlacesDataBase  getInstance(Context context){
+    public static synchronized PlacesDataBase getPlacesDataBase(Context context) {
 
-        if(placesDataBase==null){
-
-            placesDataBase = Room.databaseBuilder(context.getApplicationContext(),PlacesDataBase.class,DB_NAME)
-                    .fallbackToDestructiveMigration()
-                    .build();
-        }
+        placesDataBase = Room.databaseBuilder(context, PlacesDataBase.class, DB_NAME)
+                .fallbackToDestructiveMigration().build();
         return placesDataBase;
     }
 
-
-
     public abstract PlacesDao placesDao();
+
 }

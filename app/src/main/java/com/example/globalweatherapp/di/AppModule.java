@@ -43,7 +43,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 @Module
 public class AppModule {
 
-    public static String PREF_FILE_NAME = "UserDetails";
+    public static String PREF_FILE_NAME = "WeatherDetails";
 
 
     @Singleton

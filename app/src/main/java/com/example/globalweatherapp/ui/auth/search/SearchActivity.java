@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,6 +32,7 @@ import com.example.globalweatherapp.databinding.ActivitySearchBinding;
 import com.example.globalweatherapp.db.PlacesDataBase;
 import com.example.globalweatherapp.db.RealmManager;
 import com.example.globalweatherapp.model.PlaceDetails;
+import com.example.globalweatherapp.model.PlacesRoom;
 import com.example.globalweatherapp.viewmodels.SearchViewModel;
 import com.example.globalweatherapp.viewmodels.ViewModelProviderFactory;
 import com.google.gson.Gson;
@@ -225,7 +229,24 @@ public class SearchActivity extends DaggerAppCompatActivity {
             holder.search_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PlacesDataBase.placesDataBase.placesDao().insert(placeDetails);
+
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            PlacesDataBase.getPlacesDataBase(SearchActivity.this)
+//                                    .placesDao().insert(new PlacesRoom(placeDetails.name, placeDetails.place, placeDetails.lat, placeDetails.lon));
+//
+//                        }
+//                    }, 100);
+
+                    PlacesRoom placesRoom = new PlacesRoom(placeDetails.name,placeDetails.place,placeDetails.lat,placeDetails.lon);
+
+                    d(TAG, "onClick: "+placesRoom.name);
+                    Intent intent = new Intent();
+                    intent.putExtra("placesroom",placesRoom);
+                    setResult(1000,intent);
+                    finish();
+
                 }
             });
 

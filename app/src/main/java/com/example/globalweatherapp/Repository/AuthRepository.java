@@ -2,6 +2,7 @@ package com.example.globalweatherapp.Repository;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -41,10 +42,11 @@ public class AuthRepository {
     public String error = "";
     public final AuthApi authApi;
 
+    @Inject SharedPreferences sharedPreferences;
 
     @Inject
     Context context;
-    @Inject
+
     Device device;
 
     @Inject
@@ -53,6 +55,10 @@ public class AuthRepository {
     public AuthRepository(AuthApi authApi) {
 
         this.authApi = authApi;
+        SharedPreferences.Editor editor =  sharedPreferences.edit();
+        editor.putString("lang","en");
+        editor.apply();
+        editor.commit();
     }
 
 

@@ -1,7 +1,11 @@
 package com.example.globalweatherapp;
 
 
+import androidx.room.Room;
+
+import com.example.globalweatherapp.db.PlacesDataBase;
 import com.example.globalweatherapp.di.DaggerAppComponent;
+
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
@@ -10,6 +14,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class BaseApplication extends DaggerApplication {
+
 
 
     @Override
@@ -22,6 +27,9 @@ public class BaseApplication extends DaggerApplication {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
+
+
+
     }
 
     @Override

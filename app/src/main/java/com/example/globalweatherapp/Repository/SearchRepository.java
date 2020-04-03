@@ -1,8 +1,20 @@
 package com.example.globalweatherapp.Repository;
 
+import android.content.Context;
+import android.os.AsyncTask;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+
+import com.example.globalweatherapp.databinding.ActivitySearchBinding;
+import com.example.globalweatherapp.db.PlacesDataBase;
 import com.example.globalweatherapp.db.RealmManager;
 import com.example.globalweatherapp.model.Device;
+import com.example.globalweatherapp.model.PlaceDetails;
+import com.example.globalweatherapp.model.PlacesRoom;
 import com.example.globalweatherapp.network.SearchApi;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,6 +27,7 @@ import retrofit2.Response;
 public class SearchRepository {
 
 
+
     Device device;
     SearchApi searchApi;
     @Inject
@@ -23,6 +36,8 @@ public class SearchRepository {
         this.searchApi = searchApi;
 //         device = RealmManager.open().where(Device.class).findFirst();
     }
+
+
 
 
 

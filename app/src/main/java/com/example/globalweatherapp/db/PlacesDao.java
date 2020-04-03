@@ -1,28 +1,38 @@
 package com.example.globalweatherapp.db;
 
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.globalweatherapp.model.PlaceDetails;
+import com.example.globalweatherapp.model.PlacesRoom;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+
+import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface PlacesDao {
 
     @Query("SELECT * FROM City")
-    List<PlaceDetails> getPlacesDetails();
+    LiveData<List<PlacesRoom>> getPlacesDetails();
 
-    @Insert
-    void insert(PlaceDetails placeDetails);
+    @Insert(onConflict = REPLACE)
+    void insert(PlacesRoom placeDetails);
 
     @Update
-    void update(PlaceDetails placeDetails);
+    void update(PlacesRoom placeDetails);
 
     @Delete
-    void delete(PlaceDetails placeDetails);
+    void delete(PlacesRoom placeDetails);
+
+    @Query("DELETE FROM City")
+    void deleteAll();
 }

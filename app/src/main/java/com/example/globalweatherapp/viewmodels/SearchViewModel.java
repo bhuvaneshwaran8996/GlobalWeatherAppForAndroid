@@ -1,9 +1,12 @@
 package com.example.globalweatherapp.viewmodels;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.globalweatherapp.Repository.SearchRepository;
 import com.example.globalweatherapp.model.PlaceDetails;
+import com.example.globalweatherapp.model.PlacesRoom;
 import com.example.globalweatherapp.network.SearchApi;
 
 import java.util.List;
@@ -28,9 +31,6 @@ public class SearchViewModel extends ViewModel {
         this.searchRepository = searchRepository;
     }
 
-    public SearchViewModel(){
-
-    }
 
 
     public Observable<Response<ResponseBody>> getPlacesDetails(String address){

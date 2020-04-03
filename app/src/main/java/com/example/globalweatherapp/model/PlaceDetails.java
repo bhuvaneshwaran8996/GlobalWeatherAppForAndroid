@@ -1,12 +1,17 @@
 package com.example.globalweatherapp.model;
 
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+
+
 public class PlaceDetails implements Serializable {
 
 
+    @PrimaryKey()
     @SerializedName("name")
     public String name;
 
