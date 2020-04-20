@@ -63,7 +63,7 @@ public class AppModule {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(httpLoggingInterceptor);
 
-        return new Retrofit.Builder().baseUrl(Constants.LIVE_URL)
+        return new Retrofit.Builder().baseUrl(Constants.LOCAL_URL)
 
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -76,8 +76,8 @@ public class AppModule {
     @Singleton
     @Provides
     static RequestOptions provideRequestionOption(Application application) {
-        return RequestOptions.placeholderOf(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_foreground);
+        return RequestOptions.placeholderOf(R.drawable.main_cloudysun)
+                .error(R.drawable.main_cloudysun);
     }
 
     @Singleton

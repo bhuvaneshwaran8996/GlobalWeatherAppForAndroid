@@ -9,6 +9,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.globalweatherapp.model.HourlyRoom;
 import com.example.globalweatherapp.model.PlacesRoom;
 
 import java.util.List;
@@ -26,6 +27,17 @@ public interface PlacesDao {
 
     @Insert(onConflict = REPLACE)
     void insert(PlacesRoom placeDetails);
+
+
+
+    @Insert
+    void insert (HourlyRoom hourlyRoom);
+
+    @Delete
+    void delete(HourlyRoom hourlyRoom);
+
+    @Query("SELECT * FROM HourlyData")
+    LiveData<List<HourlyRoom>> getHourlyData();
 
     @Update
     void update(PlacesRoom placeDetails);

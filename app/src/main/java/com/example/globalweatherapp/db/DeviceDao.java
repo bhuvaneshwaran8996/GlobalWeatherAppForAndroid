@@ -32,6 +32,7 @@ public class DeviceDao {
             @Override
             public void execute(Realm realm) {
                 realm.copyToRealmOrUpdate(userList);
+
             }
         });
     }

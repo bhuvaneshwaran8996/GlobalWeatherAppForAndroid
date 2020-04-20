@@ -17,6 +17,7 @@
 
             <androidx.appcompat.widget.Toolbar
 
+                tools:background="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -29,7 +30,7 @@
                     <LinearLayout
 
 
-                        tools:background="@android:color/black"
+
                         android:id="@+id/first_toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -52,17 +53,18 @@
                             android:layout_centerInParent="true"
                             android:orientation="vertical">
 
-                            <com.example.globalweatherapp.controls.TextViewBold
-                                android:id="@+id/city_name"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:singleLine="true"
-                                android:layout_height="wrap_content"
-                                android:text="Chennai"
-                                android:textColor="@color/white">
+<!--                            <com.example.globalweatherapp.controls.TextViewBold-->
+<!--                                android:id="@+id/city_name"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:gravity="center"-->
+<!--                                android:textSize="28sp"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:singleLine="true"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Chennai"-->
+<!--                                android:textColor="@color/white">-->
 
-                            </com.example.globalweatherapp.controls.TextViewBold>
+<!--                            </com.example.globalweatherapp.controls.TextViewBold>-->
 
                             <com.example.globalweatherapp.controls.TextViewRegular
                                 android:id="@+id/city_time"
@@ -72,6 +74,7 @@
                                 android:gravity="center"
                                 android:layout_height="wrap_content"
                                 android:text="3.23pm"
+                                android:textSize="25sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/white" />
                         </LinearLayout>

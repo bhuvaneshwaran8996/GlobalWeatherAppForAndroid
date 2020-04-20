@@ -15,6 +15,17 @@ public class CurrentGeoLocation extends RealmObject implements Serializable {
     @SerializedName("timezone")
     public String timezone;
 
+    @SerializedName("date")
+    public String date;
+
+    @SerializedName("date_time_txt")
+    public String date_time_txt;
+
+
+    public String getDate() {
+        return date;
+    }
+
     public String getTime_12() {
         return time_12;
     }
@@ -42,9 +53,12 @@ public class CurrentGeoLocation extends RealmObject implements Serializable {
     public CurrentGeoLocation(){
 
     }
-    public CurrentGeoLocation(String time_12, String city_name, String timezone) {
+    public CurrentGeoLocation(String time_12, String city_name, String timezone, String date,String date_time_txt) {
+
+        this.date_time_txt = date_time_txt;
         this.time_12 = time_12;
         this.city_name = city_name;
         this.timezone = timezone;
+        this.date  = date;
     }
 }

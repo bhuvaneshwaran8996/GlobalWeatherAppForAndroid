@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#ffffff</color>
+
+
+
+    <color name="day">#6aa1e1</color>
+    <color name="night">#182F37</color>
+
 </resources>

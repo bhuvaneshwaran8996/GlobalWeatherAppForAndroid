@@ -1,89 +1,293 @@
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="java.util.List"/>
+        <import type="com.example.globalweatherapp.model.HourlyRoom.Data"/>
+        <variable
+            name="currentweather"
+            type="com.example.globalweatherapp.model.CurretWeatherDataRealm" />
+
+        <variable
+            name="hourlydata"
+            type="List&lt;com.example.globalweatherapp.model.HourlyRoom.Data>" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#6aa1e1"
+        android:background="@color/night"
         tools:context=".MainActivity">
 
         <ProgressBar
             android:id="@+id/main_progress"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
-<!--        <androidx.drawerlayout.widget.DrawerLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent">-->
+        <!--                <androidx.drawerlayout.widget.DrawerLayout-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="match_parent">-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/main_layout"
+                    layout="@layout/toolbar" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_weight="1">
 
-                <LinearLayout
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refersh"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
-                    <include   android:id="@+id/main_layout"
-                        layout="@layout/toolbar" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-
-                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                        android:id="@+id/swipe_refersh"
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ScrollView
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:orientation="vertical"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="wrap_content">
+
+                                <com.example.globalweatherapp.controls.TextViewBold
+                                    android:layout_width="match_parent"
+                                    android:text="Currently"
+                                    android:textColor="@color/white"
+                                    android:textSize="25sp"
+                                    android:layout_margin="10dp"
+
+                                    android:layout_height="wrap_content"/>
+
+                                <RelativeLayout
 
 
 
+                                    android:orientation="vertical"
+                                    android:id="@+id/currentcontainer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="40dp">
+
+
+                                    <com.example.globalweatherapp.controls.TextViewRegular
+                                        android:layout_below="@id/feelslike_container"
+                                        tools:text="April, 5"
+                                        android:text="@{currentweather.Month}"
+                                        android:id="@+id/april5"
+                                        android:layout_marginLeft="10dp"
+                                        android:textSize="25sp"
+
+                                        android:textColor="@color/white"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+
+                                    <com.example.globalweatherapp.controls.TextViewRegular
+                                        android:layout_below="@id/feelslike_container"
+                                        android:id="@+id/sunday"
+
+                                        android:layout_marginRight="10dp"
+                                        android:text="@{currentweather.day}"
+                                        android:layout_marginBottom="10dp"
+
+                                        tools:text="Sunday"
+                                        android:textColor="@color/white"
+                                        android:textSize="25sp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+
+
+
+                                    <LinearLayout
+                                        android:layout_marginTop="15dp"
+                                        android:layout_marginBottom="15dp"
+                                        android:id="@+id/city_name_container"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            android:id="@+id/current_cityname"
+                                            android:textAlignment="center"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            tools:text="Austin"
+                                            android:text="@{currentweather.CityName}"
+                                            android:textColor="@color/white"
+                                            android:textSize="33sp" />
+
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+
+                                            tools:text="Rain"
+                                            android:textAlignment="center"
+                                            android:layout_marginTop="15dp"
+                                            android:id="@+id/current_status"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_above="@id/weather_container"
+                                            android:layout_below="@id/current_cityname"
+                                            android:text="@{currentweather.weatherSummary}"
+                                            android:textColor="@color/white"
+                                            android:textSize="24sp" />
+                                    </LinearLayout>
 
                                     <RelativeLayout
-                                        android:id="@+id/fragment_container"
+
+                                        android:layout_below="@+id/city_name_container"
+                                        android:id="@+id/weather_container"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:gravity="center"
+                                        android:paddingLeft="20dp">
 
 
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            android:id="@+id/weatherlabel"
+                                            android:text="@{currentweather.weatherDisplay}"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/white"
+                                            android:textSize="50sp"
+                                            tools:text="33" />
 
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            android:id="@+id/o"
+                                            tools:visibility="visible"
+                                            android:visibility="gone"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@id/weatherlabel"
+                                            android:text="o"
+                                            android:textColor="@color/white"
+                                            android:textSize="30sp" />
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            android:id="@+id/c_or_f"
+
+
+                                            tools:visibility="visible"
+                                            android:visibility="gone"
+                                            android:layout_width="wrap_content"
+                                            android:layout_marginTop="6dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@id/o"
+                                            android:text="@{currentweather.C_or_F}"
+                                            android:textColor="@color/white"
+                                            android:textSize="30sp" />
 
 
                                     </RelativeLayout>
-                                </LinearLayout>
 
-                        </ScrollView>
+                                    <RelativeLayout
+                                        android:id="@+id/feelslike_container"
+                                        android:gravity="center"
+                                        android:layout_below="@id/weather_container"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            android:textColor="@color/white"
+                                            android:id="@+id/feelslike"
+                                            android:layout_marginRight="5dp"
+                                            android:textSize="25sp"
+                                            android:visibility="gone"
+                                            android:layout_width="wrap_content"
+                                            android:text="Feels Like"
+                                            android:layout_height="wrap_content"/>
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            tools:text=" 30"
+                                            android:textSize="20sp"
+                                            android:layout_centerVertical="true"
+                                            android:layout_toRightOf="@id/feelslike"
+                                            android:text='@{currentweather.ApparentTempertaure}'
+                                            android:textColor="@color/white"
+                                            android:id="@+id/feelslikewether"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"/>
+                                        <com.example.globalweatherapp.controls.TextViewRegular
+                                            android:id="@+id/o2"
+                                            android:text="o"
+                                            tools:visibility="visible"
+                                            android:visibility="gone"
+                                            android:textColor="@color/white"
+                                            android:layout_toRightOf="@id/feelslikewether"
+                                            android:textAlignment="center"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"/>
+                                    </RelativeLayout>
+                                </RelativeLayout>
+                            </RelativeLayout>
 
-                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                            <View
+                                android:id="@+id/view_seperator"
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:layout_below="@id/search_layout"
+                                android:background="@color/white" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <com.example.globalweatherapp.controls.TextViewBold
+                                    android:text="Hourly"
+                                    android:id="@+id/hourly"
+                                    android:textSize="25sp"
+                                    android:layout_margin="10dp"
+                                    android:textColor="@color/white"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <androidx.recyclerview.widget.RecyclerView
+                                    app:hourlylist="@{hourlydata}"
+                                    android:id="@+id/hourlyrecyclerview"
+                                    android:layout_below="@id/hourly"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+                        </LinearLayout>
 
 
-                </LinearLayout>
+
+                    </ScrollView>
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
             </LinearLayout>
 
-<!--            <com.google.android.material.navigation.NavigationView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_gravity="start"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:fitsSystemWindows="true"-->
-<!--                />-->
+        </LinearLayout>
 
-<!--        </androidx.drawerlayout.widget.DrawerLayout>-->
+        <!--                    <com.google.android.material.navigation.NavigationView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_gravity="start"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:fitsSystemWindows="true"-->
+        <!--                        />-->
+
+        <!--                </androidx.drawerlayout.widget.DrawerLayout>-->
 
 
     </RelativeLayout>

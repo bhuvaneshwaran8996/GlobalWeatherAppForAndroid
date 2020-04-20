@@ -7,8 +7,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.globalweatherapp.Repository.WeatherRepository;
 import com.example.globalweatherapp.di.Weather.WeatherViewMolesModule;
+import com.example.globalweatherapp.model.CurrentWeather;
+import com.example.globalweatherapp.model.CurrentWeatherData;
 import com.example.globalweatherapp.model.GeoLocation;
+import com.example.globalweatherapp.model.HourlyRoom;
 import com.example.globalweatherapp.model.PlacesRoom;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -39,9 +43,13 @@ public class WeatherViewModel extends ViewModel {
         this.weatherRepository.insertPlacesDetails(context,placesRoom);
     }
 
-    public Observable<Response<ResponseBody>> getCurrentWeather(String token, String lat, String lon, String lang){
-        this.weatherRepository.getCurrentData(token,lat,lon,lang);
+    public Observable<Response<JsonObject>> getCurrentWeather(String token, CurrentWeather currentWeather){
+    return    this.weatherRepository.getCurrentData(token,currentWeather);
 
+    }
+
+    public Observable<HourlyRoom> getHourlyData(String token, CurrentWeather currentWeather){
+        return  this.weatherRepository.getHourlyData(token,currentWeather);
     }
     public void deletePlacesDetails(Context context){
         weatherRepository.deleteAll(context);
@@ -49,6 +57,10 @@ public class WeatherViewModel extends ViewModel {
 
     public Single<Response<GeoLocation>> getGeolocation(String url, String Apikey, String lat, String lon){
         return weatherRepository.getGeolocation(url,Apikey,lat,lon);
+    }
+
+    public LiveData<List<HourlyRoom>> getHourlyDataFromRoom(Context context, HourlyRoom hourlyRoom){
+       return weatherRepository.setHourlyData(context,hourlyRoom);
     }
 
 }

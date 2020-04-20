@@ -29,6 +29,6 @@ public class TextViewRegular extends AppCompatTextView {
 
 
     public void init(AttributeSet attributeSet){
-        this.setTypeface(Typeface.createFromAsset(getResources().getAssets(),"fonts/Heebo-Regular.ttf"));
+        this.setTypeface(Typeface.createFromAsset(getResources().getAssets(),"fonts/ComicNeue-Light.ttf"));
     }
 }

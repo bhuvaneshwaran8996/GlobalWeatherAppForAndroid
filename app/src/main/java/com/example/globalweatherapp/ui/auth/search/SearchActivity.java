@@ -107,17 +107,9 @@ public class SearchActivity extends DaggerAppCompatActivity {
 
                         SearchAdapter searchAdapter = (SearchAdapter) binding.searchList.getAdapter();
                         if (charSequence.toString().isEmpty()) {
-
-//                            if (searchAdapter != null) {
-//                                searchAdapter.clear();
-//                                binding.searchList.setVisibility(GONE);
-//                            }
-
-
                             if (((SearchAdapter) binding.searchList.getAdapter()) != null) {
                                 ((SearchAdapter) binding.searchList.getAdapter()).clear();
                             }
-
                             binding.searchList.setVisibility(GONE);
 
                             return false;
@@ -143,14 +135,12 @@ public class SearchActivity extends DaggerAppCompatActivity {
                         return searchViewModel.getPlacesDetails(s);
                     }
                 })
-
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<ResponseBody>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable.add(d);
                     }
-
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         if (responseBodyResponse.isSuccessful()) {
@@ -160,16 +150,12 @@ public class SearchActivity extends DaggerAppCompatActivity {
                             try {
                                 List<PlaceDetails> placesList = new Gson().fromJson(responseBodyResponse.body().string(), typeOfObjectsList);
                                 if (placesList.size() > 0 && !binding.searchLayout.locationsearch.getQuery().toString().equalsIgnoreCase("")) {
-
                                     binding.searchList.setVisibility(View.VISIBLE);
                                     binding.searchList.setAdapter(new SearchAdapter(placesList));
-
                                 } else {
-
                                     if (((SearchAdapter) binding.searchList.getAdapter()) != null) {
                                         ((SearchAdapter) binding.searchList.getAdapter()).clear();
                                     }
-
                                     binding.searchList.setVisibility(GONE);
                                 }
                             } catch (IOException e) {
@@ -178,19 +164,16 @@ public class SearchActivity extends DaggerAppCompatActivity {
                             }
                         }
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         d(TAG, "onError: " + e.getMessage());
                     }
-
                     @Override
                     public void onComplete() {
                         d(TAG, "onComplete: ");
                     }
                 });
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -203,19 +186,15 @@ public class SearchActivity extends DaggerAppCompatActivity {
         public SearchAdapter(List<PlaceDetails> placeDetailsList) {
             this.placeDetailsList = placeDetailsList;
         }
-
         @NonNull
         @Override
         public SearchAdapter.SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_inflate, null, false);
             return new SearchViewHolder(view);
         }
-
         @Override
         public void onBindViewHolder(@NonNull final SearchAdapter.SearchViewHolder holder, final int position) {
-
             final PlaceDetails placeDetails = placeDetailsList.get(position);   //name - city , place - state
-
             holder.name.setText(placeDetails.name);
             holder.place.setText(placeDetails.place);
             holder.view_seperator.post(new Runnable() {
@@ -230,46 +209,29 @@ public class SearchActivity extends DaggerAppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            PlacesDataBase.getPlacesDataBase(SearchActivity.this)
-//                                    .placesDao().insert(new PlacesRoom(placeDetails.name, placeDetails.place, placeDetails.lat, placeDetails.lon));
-//
-//                        }
-//                    }, 100);
-
                     PlacesRoom placesRoom = new PlacesRoom(placeDetails.name,placeDetails.place,placeDetails.lat,placeDetails.lon);
-
                     d(TAG, "onClick: "+placesRoom.name);
                     Intent intent = new Intent();
                     intent.putExtra("placesroom",placesRoom);
                     setResult(1000,intent);
                     finish();
-
                 }
             });
 
         }
-
         public void clear() {
             this.placeDetailsList.clear();
             notifyDataSetChanged();
         }
-
         @Override
         public int getItemCount() {
             return this.placeDetailsList.size();
         }
-
         public class SearchViewHolder extends RecyclerView.ViewHolder {
-
             TextViewMedium name;
             TextViewRegular place;
             LinearLayout view_seperator;
-
             LinearLayout search_item;
-
             public SearchViewHolder(@NonNull View itemView) {
                 super(itemView);
                 search_item = itemView.findViewById(R.id.search_item);

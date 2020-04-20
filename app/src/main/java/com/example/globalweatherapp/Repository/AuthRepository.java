@@ -55,10 +55,8 @@ public class AuthRepository {
     public AuthRepository(AuthApi authApi) {
 
         this.authApi = authApi;
-        SharedPreferences.Editor editor =  sharedPreferences.edit();
-        editor.putString("lang","en");
-        editor.apply();
-        editor.commit();
+
+
     }
 
 
@@ -126,7 +124,7 @@ public class AuthRepository {
         if(Util.isNetworkConnectionAvailable(thisActivity)){
 
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }finally {

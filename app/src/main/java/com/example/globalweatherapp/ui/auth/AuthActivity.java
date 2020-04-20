@@ -72,9 +72,9 @@ public class AuthActivity extends DaggerAppCompatActivity {
         Log.d(TAG, "onCreate: "+m_androidId);
         RealmManager.open();
 
-
         authViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AuthViewModel.class);
         authViewModel.setDevice(m_androidId,thisActivity);
+
         subscribeobservers();
 
 
