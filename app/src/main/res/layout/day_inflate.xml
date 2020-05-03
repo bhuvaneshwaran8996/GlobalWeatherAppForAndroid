@@ -1,0 +1,142 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:paddingRight="2dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/night"
+
+    android:paddingBottom="10dp"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.example.globalweatherapp.controls.TextViewRegular
+            android:layout_width="wrap_content"
+            android:id="@+id/dayname"
+            android:text="Tuesday"
+            android:textColor="@color/white"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="20sp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_marginRight="10dp"
+
+
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+
+            android:layout_centerVertical="true"
+
+            android:id="@+id/day_icon"
+
+            android:src="@mipmap/clear_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ImageView>
+        <com.example.globalweatherapp.controls.TextViewRegular
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/day_icon"
+            android:id="@+id/day_summary"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:text="Partly-cloudy-weather"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+
+        </com.example.globalweatherapp.controls.TextViewRegular>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="100dp"
+        android:gravity="right"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.example.globalweatherapp.controls.TextViewRegular
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/hourly_day_one"
+                android:text="30"
+                android:textSize="20sp"
+                app:drawableTint="@color/white"
+                android:layout_height="wrap_content"/>
+            <com.example.globalweatherapp.controls.TextViewRegular
+                android:layout_width="wrap_content"
+                android:text="o"
+
+                android:id="@+id/day_01"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@+id/hourly_day_one"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <com.example.globalweatherapp.controls.TextViewRegular
+            android:layout_width="wrap_content"
+            android:text="/"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.example.globalweatherapp.controls.TextViewRegular
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/hourly_day_two"
+                android:text="30"
+                app:drawableTint="@color/white"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"/>
+            <com.example.globalweatherapp.controls.TextViewRegular
+                android:layout_width="wrap_content"
+                android:text="o"
+                android:id="@+id/day_02"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@+id/hourly_day_two"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
+<View
+
+android:layout_width="match_parent"
+
+    android:id="@+id/bottomview"
+
+
+    android:background="@color/white"
+android:layout_height="0.3dp"/>
+</LinearLayout>

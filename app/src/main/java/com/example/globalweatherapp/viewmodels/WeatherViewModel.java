@@ -9,7 +9,10 @@ import com.example.globalweatherapp.Repository.WeatherRepository;
 import com.example.globalweatherapp.di.Weather.WeatherViewMolesModule;
 import com.example.globalweatherapp.model.CurrentWeather;
 import com.example.globalweatherapp.model.CurrentWeatherData;
+import com.example.globalweatherapp.model.DayRetofit;
+import com.example.globalweatherapp.model.DayRoom;
 import com.example.globalweatherapp.model.GeoLocation;
+import com.example.globalweatherapp.model.HourlyDataRoomDB;
 import com.example.globalweatherapp.model.HourlyRoom;
 import com.example.globalweatherapp.model.PlacesRoom;
 import com.google.gson.JsonObject;
@@ -59,8 +62,28 @@ public class WeatherViewModel extends ViewModel {
         return weatherRepository.getGeolocation(url,Apikey,lat,lon);
     }
 
-    public LiveData<List<HourlyRoom>> getHourlyDataFromRoom(Context context, HourlyRoom hourlyRoom){
-       return weatherRepository.setHourlyData(context,hourlyRoom);
+
+    public void insertHourly(HourlyDataRoomDB hourlyDataRoomDB, Context context){
+        weatherRepository.insertHourlyData(hourlyDataRoomDB,context);
     }
+    public LiveData<List<HourlyDataRoomDB>> getHourlyList(){
+        return weatherRepository.getHourlyData();
+    }
+    public Observable<DayRetofit> getDayWeatherData(String token, CurrentWeather currentWeather){
+        return weatherRepository.getDayWeatherData(token, currentWeather);
+    }
+    public void insertDayDataRoom(Context context, DayRoom dayRoom){
+        weatherRepository.insertDayDataRoom(context,dayRoom);
+    }
+    public LiveData<List<DayRoom>> getDayRoom(){
+        return weatherRepository.getDayaData();
+    }
+//    public List<HourlyRoom> getHourlyRoom(Context context){
+//        return  weatherRepository.getHourlyRoom(context);
+//    }
+//    public  void setHourlyDataFromRoom(Context context, HourlyRoom hourlyRoom){
+//        weatherRepository.setHourlyData(context,hourlyRoom);
+//    }
+//
 
 }

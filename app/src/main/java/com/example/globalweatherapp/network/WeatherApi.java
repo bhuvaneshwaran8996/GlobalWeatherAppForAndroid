@@ -1,6 +1,8 @@
 package com.example.globalweatherapp.network;
 
 import com.example.globalweatherapp.model.CurrentWeather;
+import com.example.globalweatherapp.model.CurrentWeatherData;
+import com.example.globalweatherapp.model.DayRetofit;
 import com.example.globalweatherapp.model.GeoLocation;
 import com.example.globalweatherapp.model.HourlyRoom;
 import com.google.gson.JsonElement;
@@ -34,4 +36,8 @@ public interface WeatherApi {
     @Headers({"Content-Type:application/json"})
     @POST("api/gethourly")
     Observable<HourlyRoom> getHourlyData(@Header("Authorization") String bearer, @Body CurrentWeather currentWeather);
+
+    @Headers({"Content-Type:application/json"})
+    @POST("api/getday")
+    Observable<DayRetofit> getDayData(@Header("Authorization") String bearer, @Body CurrentWeather currentWeather);
 }

@@ -9,6 +9,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.globalweatherapp.model.DayRoom;
+import com.example.globalweatherapp.model.HourlyDataRoomDB;
 import com.example.globalweatherapp.model.HourlyRoom;
 import com.example.globalweatherapp.model.PlacesRoom;
 
@@ -29,15 +31,26 @@ public interface PlacesDao {
     void insert(PlacesRoom placeDetails);
 
 
+//    @Query("SELECT * FROM HourlyData")
+//   List<HourlyRoom> getHoyrlyDetails();
 
-    @Insert
-    void insert (HourlyRoom hourlyRoom);
+    @Query("SELECT * FROM HOURLY")
+    LiveData<List<HourlyDataRoomDB>> getHourlyData();
 
-    @Delete
-    void delete(HourlyRoom hourlyRoom);
+    @Update
+    void update(HourlyDataRoomDB hourlyDataRoomDB);
 
-    @Query("SELECT * FROM HourlyData")
-    LiveData<List<HourlyRoom>> getHourlyData();
+    @Insert(onConflict = REPLACE)
+    void insert(HourlyDataRoomDB hourlyDataRoomDB);
+
+//
+//    @Insert
+//    long insert(HourlyRoom hourlyRoom);
+//
+//    @Delete
+//    void delete(HourlyRoom hourlyRoom);
+
+
 
     @Update
     void update(PlacesRoom placeDetails);
@@ -47,4 +60,10 @@ public interface PlacesDao {
 
     @Query("DELETE FROM City")
     void deleteAll();
+
+    @Insert
+    void insert(DayRoom dayRoom);
+
+    @Query("SELECT * FROM Day")
+     LiveData<List<DayRoom>> getDayRoomData();
 }

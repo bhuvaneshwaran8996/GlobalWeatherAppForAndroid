@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/night"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_margin="10dp"
+
+    android:orientation="vertical" android:layout_width="80dp"
+    android:layout_height="200dp">
 
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.example.globalweatherapp.controls.TextViewMedium
+        <com.example.globalweatherapp.controls.TextViewRegular
+            android:paddingTop="20dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
+            android:textSize="30sp"
             android:text="30"
             android:id="@+id/hourly_label"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:layout_height="wrap_content"/>
-        <com.example.globalweatherapp.controls.TextViewMedium
+        <com.example.globalweatherapp.controls.TextViewRegular
             android:layout_width="wrap_content"
             android:textColor="@color/white"
             android:text="o"
-            android:textSize="10sp"
+            android:paddingTop="20dp"
+            android:textSize="15sp"
             android:layout_marginBottom="5dp"
             android:layout_alignParentTop="true"
             android:gravity="top"
@@ -29,15 +34,18 @@
     </RelativeLayout>
 
     <ImageView
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:id="@+id/weather_icon_hourly"
         android:src="@mipmap/clear_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <com.example.globalweatherapp.controls.TextViewMedium
+    <com.example.globalweatherapp.controls.TextViewRegular
         android:id="@+id/time_hourly"
         android:layout_width="wrap_content"
         android:text="8.00"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:layout_height="wrap_content"/>

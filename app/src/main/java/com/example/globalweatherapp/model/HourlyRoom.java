@@ -9,20 +9,22 @@ import androidx.room.TypeConverters;
 import com.example.globalweatherapp.converters.DataConverters;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(tableName = "HourlyData")
-public class HourlyRoom implements Serializable
+import io.realm.RealmModel;
+import io.realm.RealmObject;
+
+
+public class HourlyRoom  implements Serializable   //retrofit model
 {
 
+    List<HourlyRoom.Data> data;
 
-    public HourlyRoom(){
-
-
+    public HourlyRoom() {
+        data = new ArrayList<>();
     }
 
-
-    @PrimaryKey(autoGenerate = true)
     private int id;
 
     public int getId() {
@@ -33,53 +35,61 @@ public class HourlyRoom implements Serializable
         this.id = id;
     }
 
-    @TypeConverters(DataConverters.class)
-    private List<Data> data;
 
     private String icon;
 
     private String sumary;
 
-    public List<Data> getData ()
-    {
+    public List<HourlyRoom.Data> getData() {
         return data;
     }
 
-    public void setData (List<Data> data)
-    {
+    public void setData(List<HourlyRoom.Data> data) {
         this.data = data;
     }
 
-    public String getIcon ()
-    {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon (String icon)
-    {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 
-    public String getSumary ()
-    {
+    public String getSumary() {
         return sumary;
     }
 
-    public void setSumary (String sumary)
-    {
+    public void setSumary(String sumary) {
         this.sumary = sumary;
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [data = "+data+", icon = "+icon+", sumary = "+sumary+"]";
+    public String toString() {
+        return "ClassPojo [data = " + data + ", icon = " + icon + ", sumary = " + sumary + "]";
     }
 
 
-    public class Data
-    {
+    public class Data implements Serializable {
+
+        public Data() {
+
+        }
+
         private String summary;
+
+        public Data(String summary, String visibility, String icon, String temperature, String humidity, String windspeed, String time, String pressure, String ozone, String cloudcover) {
+            this.summary = summary;
+            this.visibility = visibility;
+            this.icon = icon;
+            this.temperature = temperature;
+            this.humidity = humidity;
+            this.windspeed = windspeed;
+            this.time = time;
+            this.pressure = pressure;
+            this.ozone = ozone;
+            this.cloudcover = cloudcover;
+        }
 
         private String visibility;
 
@@ -99,112 +109,91 @@ public class HourlyRoom implements Serializable
 
         private String cloudcover;
 
-        public String getSummary ()
-        {
+        public String getSummary() {
             return summary;
         }
 
-        public void setSummary (String summary)
-        {
+        public void setSummary(String summary) {
             this.summary = summary;
         }
 
-        public String getVisibility ()
-        {
+        public String getVisibility() {
             return visibility;
         }
 
-        public void setVisibility (String visibility)
-        {
+        public void setVisibility(String visibility) {
             this.visibility = visibility;
         }
 
-        public String getIcon ()
-        {
+        public String getIcon() {
             return icon;
         }
 
-        public void setIcon (String icon)
-        {
+        public void setIcon(String icon) {
             this.icon = icon;
         }
 
-        public String getTemperature ()
-        {
+        public String getTemperature() {
             return temperature;
         }
 
-        public void setTemperature (String temperature)
-        {
+        public void setTemperature(String temperature) {
             this.temperature = temperature;
         }
 
-        public String getHumidity ()
-        {
+        public String getHumidity() {
             return humidity;
         }
 
-        public void setHumidity (String humidity)
-        {
+        public void setHumidity(String humidity) {
             this.humidity = humidity;
         }
 
-        public String getWindspeed ()
-        {
+        public String getWindspeed() {
             return windspeed;
         }
 
-        public void setWindspeed (String windspeed)
-        {
+        public void setWindspeed(String windspeed) {
             this.windspeed = windspeed;
         }
 
-        public String getTime ()
-        {
+        public String getTime() {
             return time;
         }
 
-        public void setTime (String time)
-        {
+        public void setTime(String time) {
             this.time = time;
         }
 
-        public String getPressure ()
-        {
+        public String getPressure() {
             return pressure;
         }
 
-        public void setPressure (String pressure)
-        {
+        public void setPressure(String pressure) {
             this.pressure = pressure;
         }
 
-        public String getOzone ()
-        {
+        public String getOzone() {
             return ozone;
         }
 
-        public void setOzone (String ozone)
-        {
+        public void setOzone(String ozone) {
             this.ozone = ozone;
         }
 
-        public String getCloudcover ()
-        {
+        public String getCloudcover() {
             return cloudcover;
         }
 
-        public void setCloudcover (String cloudcover)
-        {
+        public void setCloudcover(String cloudcover) {
             this.cloudcover = cloudcover;
         }
 
         @Override
-        public String toString()
-        {
-            return "ClassPojo [summary = "+summary+", visibility = "+visibility+", icon = "+icon+", temperature = "+temperature+", humidity = "+humidity+", windspeed = "+windspeed+", time = "+time+", pressure = "+pressure+", ozone = "+ozone+", cloudcover = "+cloudcover+"]";
+        public String toString() {
+            return "ClassPojo [summary = " + summary + ", visibility = " + visibility + ", icon = " + icon + ", temperature = " + temperature + ", humidity = " + humidity + ", windspeed = " + windspeed + ", time = " + time + ", pressure = " + pressure + ", ozone = " + ozone + ", cloudcover = " + cloudcover + "]";
         }
+
     }
 
 }
-

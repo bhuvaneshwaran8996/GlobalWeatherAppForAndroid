@@ -6,7 +6,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#6aa1e1"
+        tools:background="#6aa1e1"
+        android:background="@color/night"
         tools:context=".ui.auth.search.SearchActivity">
 
         <ProgressBar

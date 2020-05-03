@@ -63,7 +63,7 @@ public class AppModule {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(httpLoggingInterceptor);
 
-        return new Retrofit.Builder().baseUrl(Constants.LOCAL_URL)
+        return new Retrofit.Builder().baseUrl(Constants.LIVE_URL)
 
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))

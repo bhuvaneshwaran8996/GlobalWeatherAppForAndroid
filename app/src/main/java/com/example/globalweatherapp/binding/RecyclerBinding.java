@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.globalweatherapp.adapter.HourlyRecyclerAdapter;
+import com.example.globalweatherapp.model.Data;
 import com.example.globalweatherapp.model.HourlyRoom;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class RecyclerBinding {
 //    }
 
     @BindingAdapter("hourlylist")
-    public static void bindhourlydata(final RecyclerView recyclerView, List<HourlyRoom.Data> hourlyRoomsList){
+    public static void bindhourlydata(final RecyclerView recyclerView, List<Data> hourlyRoomsList){
         if(hourlyRoomsList == null){
             return;
         }
@@ -48,12 +49,13 @@ public class RecyclerBinding {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(),LinearLayoutManager.HORIZONTAL,false));
         }
         HourlyRecyclerAdapter hourlyRecyclerAdapter =(HourlyRecyclerAdapter) recyclerView.getAdapter();
-        if(hourlyRecyclerAdapter==null){
-            hourlyRecyclerAdapter = new HourlyRecyclerAdapter(recyclerView.getContext(),hourlyRoomsList);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(hourlyRecyclerAdapter);
-
-        }
+//        if(hourlyRecyclerAdapter==null){
+//            hourlyRecyclerAdapter = new HourlyRecyclerAdapter(recyclerView.getContext(),hourlyRoomsList);
+//            recyclerView.setHasFixedSize(true);
+//            recyclerView.setAdapter(hourlyRecyclerAdapter);
+//            hourlyRecyclerAdapter.notifyDataSetChanged();
+//
+//        }
 
 
     }

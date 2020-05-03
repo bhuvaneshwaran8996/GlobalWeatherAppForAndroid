@@ -33,6 +33,8 @@ public class DeviceDao {
             public void execute(Realm realm) {
                 realm.copyToRealmOrUpdate(userList);
 
+
+
             }
         });
     }
